@@ -1,4 +1,5 @@
-
+import beads.*;
+import controlP5.*;
 import shiffman.box2d.*;
 import org.jbox2d.collision.shapes.*; //Might change the import to directly later
 import org.jbox2d.common.*;
