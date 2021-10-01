@@ -8,10 +8,13 @@ import org.jbox2d.dynamics.*;
 Box2DProcessing box2d;
 
 ArrayList<Boundary> boundaries;
+HeatMapping heatMap; 
 
 void setup(){
  size(900, 900);
  smooth();
+ 
+ 
  //Box2D setup
  box2d = new Box2DProcessing(this);
  box2d.createWorld();
@@ -27,13 +30,16 @@ void setup(){
  boundaries.add(new Boundary(width/2-300, 650, 5, 300, 0));
  boundaries.add(new Boundary(width/2+300, 650, 5, 300, 0));
  
+ PVector origin = new PVector(width/2, 650);
+ heatMap = new HeatMapping(origin);
 }
 
 void draw(){
   background(255);
   
   box2d.step();
-  //displays Boundary
+
+  heatMap.run(); 
   
   for(int i = 0; i < boundaries.size(); i++){
       Boundary b = boundaries.get(i);
