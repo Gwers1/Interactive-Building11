@@ -30,7 +30,7 @@ void setup(){
  boundaries.add(new Boundary(width/2-300, 650, 5, 300, 0));
  boundaries.add(new Boundary(width/2+300, 650, 5, 300, 0));
  
- PVector origin = new PVector(width/2, 650);
+ PVector origin = new PVector(width/2, 450);
  heatMap = new HeatMapping(origin);
 }
 
