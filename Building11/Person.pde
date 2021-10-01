@@ -8,7 +8,6 @@ class Person{
   //heat value
   float heat; 
   Body b;
-  PShape person, head, body, leftArm, leftLeg, rightLeg;
   //constructor
   Person(float x, float y, float heat){ 
     this.x = x;
@@ -47,11 +46,6 @@ class Person{
     popMatrix();
   }
   
-  //Might not need this
-  float getHeat(){
-  return heat;  
-  }
-  
   //creates object in box2d world
   void makeBody(Vec2 location, float radius){
     //Creates body definition
@@ -72,5 +66,13 @@ class Person{
     
     b.createFixture(fd);
     b.setAngularVelocity(random(-10,10));
+  }
+  
+  //test fun
+  float getHeat(){
+  return heat;  
+  }
+  void setHeat(float newHeat){
+     heat = newHeat;
   }
 }
