@@ -8,7 +8,7 @@ import org.jbox2d.dynamics.*;
 Box2DProcessing box2d;
 
 ArrayList<Boundary> boundaries;
-
+Person guy;
 void setup(){
  size(900, 900);
  smooth();
@@ -27,6 +27,7 @@ void setup(){
  boundaries.add(new Boundary(width/2-300, 650, 5, 300, 0));
  boundaries.add(new Boundary(width/2+300, 650, 5, 300, 0));
  
+ guy = new Person(width/2,0,1);
 }
 
 void draw(){
@@ -34,7 +35,7 @@ void draw(){
   
   box2d.step();
   //displays Boundary
-  
+  guy.display();
   for(int i = 0; i < boundaries.size(); i++){
       Boundary b = boundaries.get(i);
       b.display();
