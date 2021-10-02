@@ -1,4 +1,6 @@
+
 class ParticleSystem  {
+  Table rainData;
 
   ArrayList<Particle> particles;    // An ArrayList for all the particles
   PVector origin;         // An origin point for where particles are birthed
@@ -27,10 +29,13 @@ class ParticleSystem  {
       }
     }
   }
+  
+  
 
   void addParticles(int n) {
     for (int i = 0; i < n; i++) {
       particles.add(new Particle(origin.x,origin.y));
+
     }
   }
 
@@ -43,4 +48,5 @@ class ParticleSystem  {
       return false;
     }
   }
+
 }
