@@ -37,10 +37,13 @@ class Person{
   void display(){
     Vec2 pos = box2d.getBodyPixelCoord(b);
     float a = b.getAngle();
+    
+    float m = map(heat, 0, 10, 0, 255);
+    
     pushMatrix();
     translate(pos.x, pos.y);
     rotate(-a);
-    fill(255);
+    fill(m, 0, 255-m);
     ellipse(0, -10, 5, 5);
     rect(0, 0, 10, 15, 30);
     popMatrix();

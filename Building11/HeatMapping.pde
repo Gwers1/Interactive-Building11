@@ -17,13 +17,9 @@ class HeatMapping {
  
  void addPeople(float heat){ //returns left over
    if(heat > 10){
-     print(" Adding people > ");
-     people.add(new Person(origin.x, origin.y, 10));
-     print(people.size());
+     people.add(new Person(origin.x + random(-200, 200), origin.y, 10));
    }else{
-     print(" Adding people with heat: ", heat);
-     people.add(new Person(origin.x, origin.y, heat));
-     print(" This is size: ", people.size());
+     people.add(new Person(origin.x + random(-200, 200), origin.y, heat));
    }
    
  }
@@ -39,43 +35,42 @@ class HeatMapping {
          addPeople(totalPeople);
        }
      }
-     print(" This is calculate: ", calculate());
-     print(" This is total people: ", totalPeople);
-     if(calculate() > 0 ){ //add people
+
+     if(calculate() > 0 ){ //remove people
+       while(calculate() != 0){
+         Person temp = people.get(0);
+         float amountLeft = calculate();
+         if(temp.getHeat() > amountLeft){
+          temp.setHeat(temp.getHeat() - amountLeft); 
+         }
+         if(temp.getHeat() <= amountLeft){
+           temp.setHeat(0);
+           if(temp.isDone()){
+             people.remove(temp);
+           }
+         }
+       }
+     }
+       
+     if(calculate() < 0){ //adding people
        while(calculate() != 0){
          Person temp = people.get(people.size()-1);
          float amountLeft = calculate();
          float recentHeat = temp.getHeat();
          if(recentHeat < 10){
-           if(10 - recentHeat < amountLeft){
-            temp.setHeat(temp.getHeat() + amountLeft); 
+           if(-amountLeft + recentHeat < 10){
+            temp.setHeat(temp.getHeat() - amountLeft); 
            }
-           if(10 - recentHeat > amountLeft){
+           if(-amountLeft + recentHeat >= 10){
              temp.setHeat(10);
            }
          }
          if(recentHeat == 10){
-           addPeople(calculate());
+           addPeople(-calculate());
          }
-       }
-     }
-       
-     if(calculate() < 0){ //destroy people
-       while(calculate() != 0){
-         Person temp = people.get(people.size()-1);
-         float amountLeft = calculate();
-         print(" This is amount left: ", -amountLeft);
-         print(" This is temp get heat: ", temp.getHeat());
-         if(temp.getHeat() > -amountLeft){
-          temp.setHeat(temp.getHeat() + amountLeft); 
-          print(temp.getHeat());
-         }
-         if(temp.getHeat() <= -amountLeft){
-           temp.setHeat(0);
-           if(temp.isDone()){
-             print("removing");
-             people.remove(temp);
-           }
+         if(recentHeat > 10){ //If this happens its broken!
+          print("Please fix code!");
+          temp.setHeat(10); 
          }
        }
      }
@@ -88,7 +83,7 @@ class HeatMapping {
    }
  }
  
- //if this returns positve value more people need to be added to the list
+ //if this returns negative value more people need to be added to the list
  float calculate(){
    float count = 0;
    if(people.size() != 0){
