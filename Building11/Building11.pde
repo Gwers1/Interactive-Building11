@@ -1,13 +1,17 @@
-import beads.*;
-import controlP5.*;
+
 import shiffman.box2d.*;
-import org.jbox2d.collision.shapes.*; //Might change the import to directly later
+import org.jbox2d.collision.shapes.*;
 import org.jbox2d.common.*;
 import org.jbox2d.dynamics.*;
 
+  PImage img;
+  PImage img2;
+
+// A reference to our box2d world
 Box2DProcessing box2d;
 ControlP5 cp5;
 
+// A list we'll use to track fixed objects
 ArrayList<Boundary> boundaries;
 HeatMapping heatMap; 
 Luminosity luminosity;
@@ -118,4 +122,38 @@ void draw() {
     Boundary b = boundaries.get(i);
     b.display();
   }
+
 }
+
+void draw() {
+  background(255);
+  tint(255,255);
+    image(img2 , width/2, 450);
+    
+    tint( 255, map(125,0, height, 0, 255 ) );
+    image(img, width/2, 450 );  
+
+
+
+  // We must always step through time!
+  box2d.step();
+
+  // Run all the particle systems
+  for (ParticleSystem system: systems) {
+    system.run();
+
+    int n = (int) random(0,2);
+    system.addParticles(n);
+  }
+
+  // Display all the boundaries
+  for (Boundary wall: boundaries) {
+    wall.display();
+  }
+
+
+for (int i = 0; i < 1; i++){
+  // Add a new Particle System whenever the mouse is clicked
+  systems.add(new ParticleSystem(0, new PVector(width/2, 1)));
+
+}}
