@@ -13,7 +13,7 @@ class Person{
     this.x = x;
     this.y = y;
     this.heat = heat;
-    r = 5;
+    r = 10;
     
     makeBody(new Vec2(x,y), r);
   }
@@ -44,8 +44,8 @@ class Person{
     translate(pos.x, pos.y);
     rotate(-a);
     fill(m, 0, 255-m);
-    ellipse(0, -10, 5, 5);
-    rect(0, 0, 10, 15, 30);
+    ellipse(0, -15, 7.5, 7.5);
+    rect(0, 0, 15, 22.5, 30);
     popMatrix();
   }
   
