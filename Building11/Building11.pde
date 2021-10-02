@@ -64,11 +64,31 @@ void setup(){
 
 void draw(){
   background(255);
+  fill(0);
+  rect(width/2, height/2 - 300 ,900 , 400);
   
   box2d.step();
   if(People == true){
     //Add sound in here!
     heatMap.run();
+    
+    int x = 650;
+    int y = 825;
+    int w = 200;
+    int h = 50;
+    color c1 = color(0, 0, 255);
+    color c2 = color(255, 0, 0);
+    for (int i = x; i <= x+w; i++) {
+      float inter = map(i, x, x+w, 0, 1);
+      color c = lerpColor(c1, c2, inter);
+      stroke(c);
+      line(i, y, i, y+h);
+    }
+    
+    textSize(18);
+    fill(0);
+    text("0", 650, 885);
+    text("10", 845, 885);
   }
   
   for(int i = 0; i < boundaries.size(); i++){
