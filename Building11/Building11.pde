@@ -62,6 +62,7 @@ void setup() {
   PVector origin = new PVector(width/2, 450);
   heatMap = new HeatMapping(origin);
   luminosity = new Luminosity(boundaries);
+  
 }
 
 void draw() {
@@ -97,6 +98,9 @@ void draw() {
     text("0", 650, 885);
     text("10", 845, 885);
     text("Total People: " + heatMap.getTotal(), 200, 850);
+  }
+  if(People == false){
+    heatMap.restart();
   }
 
 

@@ -24,10 +24,6 @@ public class Luminosity {
       y = Waspmote.getFloat(index, 1);
       index++;
     }
-    else {
-      index = 0; //reset
-      println("reset");
-    }
     fill(rangeConvert(y));
     rect(width/2, height - 325, 900, 450);
     println(index);
