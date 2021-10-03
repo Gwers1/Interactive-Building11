@@ -17,7 +17,7 @@ ParticleSystem rain;
 Wind wind;
 //Additional global varriables
 boolean People, Rain, Wind, Luminosity = false;
-boolean lumPlayed, pplPlayed = false;
+boolean lumPlayed, pplPlayed, windPlayed = false;
 
 void setup() {
   size(900, 900);
@@ -137,11 +137,16 @@ void draw() {
   //Wind
   if(Wind == true) {
     box2d.setGravity(wind.getWindCalc(), -10);
-    wind.playSound();
+    if (!windPlayed) {
+      wind.playSound();
+      windPlayed = true;
+    }
+    
   }
   if(Wind == false) {
     box2d.setGravity(0, -10);
     wind.stopSound();
+    windPlayed = false;
   }
   //Rain
   if(Rain == true){
