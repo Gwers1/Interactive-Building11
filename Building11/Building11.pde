@@ -91,6 +91,7 @@ void draw() {
     fill(0);
     text("0", 650, 885);
     text("10", 845, 885);
+    text("Total People: " + heatMap.getTotal(), 200, 850);
   }
   if (Luminosity == true) {
     luminosity.run();
