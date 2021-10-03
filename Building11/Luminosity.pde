@@ -2,6 +2,8 @@ public class Luminosity {
   Table w, rangeTable;
   int index;
   float lux, low, high;
+  AudioContext ac;
+  SamplePlayer player;
 
 
   Luminosity() {
@@ -12,6 +14,16 @@ public class Luminosity {
     w = loadTable ("AverageWaspmoteLuxValues.csv");
     low = min(w);
     high = max(w);
+    
+    ac = new AudioContext();
+    String audioFileName = sketchPath("") + "light-switch-sound-effect.mp3";
+    player = new SamplePlayer(ac, SampleManager.sample(audioFileName));
+    player.setKillOnEnd(false);
+    Gain g = new Gain(ac,1,0.5);
+    g.addInput(player);
+    
+    ac.out.addInput(g);
+    
   }
 
 
@@ -49,5 +61,11 @@ public class Luminosity {
     rangeTable = loadTable("AverageWaspmoteLuxValues.csv");
     rangeTable.sort(0);
     return rangeTable.getFloat(rangeTable.getRowCount()-1, 0);
+  }
+  
+  void play() {
+    ac.start();
+    player.start();
+    player.setToLoopStart();
   }
 }

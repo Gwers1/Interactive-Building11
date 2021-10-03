@@ -15,6 +15,7 @@ Luminosity luminosity;
 Wind wind;
 //Additional global varriables
 boolean People, Rain, Wind, Luminosity = false;
+boolean lumPlayed = false;
 
 void setup() {
   size(900, 900);
@@ -72,11 +73,17 @@ void draw() {
   rect(width/2, height/2 - 300, 900, 400);
 
   box2d.step();
-  
   wind.calculate();
   luminosity.calculate();  
   if (Luminosity == true) {
     luminosity.display();
+    if (lumPlayed == false) {
+      luminosity.play();
+      lumPlayed = true;
+    }
+  }
+  if (Luminosity == false) {
+    lumPlayed = false;
   }
   heatMap.run();
   if (People == true) {
@@ -102,18 +109,17 @@ void draw() {
     text("10", 845, 885);
     text("Total People: " + heatMap.getTotal(), 200, 850);
   }
-  if(People == false){
+  if (People == false) {
     heatMap.restart();
   }
-  
-  if(Wind == true){
+
+  if (Wind == true) {
     box2d.setGravity(wind.getWindCalc(), -10);
-    print("setting gravity", wind.getWindCalc());
   }
-  if(Wind == false){
-   box2d.setGravity(0, -10); 
+  if (Wind == false) {
+    box2d.setGravity(0, -10);
   }
-  
+
   for (int i = 0; i < boundaries.size(); i++) {
     Boundary b = boundaries.get(i);
     b.display();
