@@ -10,8 +10,8 @@ class Wind {
     windSpd = loadTable("https://eif-research.feit.uts.edu.au/api/csv/?rFromDate=2021-03-01T00%3A00&rToDate=2021-04-01T00%3A00&rFamily=weather&rSensor=IWS", "csv");
     windDir = loadTable("https://eif-research.feit.uts.edu.au/api/csv/?rFromDate=2021-03-01T00%3A00&rToDate=2021-04-01T00%3A00&rFamily=weather&rSensor=IWD", "csv");
     gainVal = 1;
-    //ac = AudioContext.getDefaultContext();
-    ac = new AudioContext();
+    ac = AudioContext.getDefaultContext();
+    //ac = new AudioContext();
     String audioFileName = sketchPath("") + "wind.mp3";
     Sample sample = SampleManager.sample(audioFileName); 
     SamplePlayer player = new SamplePlayer(sample);
