@@ -39,10 +39,8 @@ class HeatMapping {
      print("This is in: ", BroadwayIn.getString(placeInList, 0), " ");
      print("This is out: ", BroadwayOut.getString(placeInList, 0) ," ");
      if(people.size() == 0){ //inital case
-       if((totalPeople > 0 && totalPeople <= 10)){
-         //print(" people.size() if: ", people.size());
-         addPeople(totalPeople);
-       }
+       //print(" people.size() if: ", people.size());
+       addPeople(totalPeople);
      }
 
      if(calculate() > 0 ){ //remove people
@@ -87,15 +85,19 @@ class HeatMapping {
 
      placeInList++;
    }
+ }
+ 
+ void display(){
    for(Person p: people) {
      p.display();
-   }
+   } 
  }
  
  void restart(){
-  placeInList = 0;
+  for(Person p: people){
+   p.killBody(); 
+  }
   people.clear();
-  totalPeople = 0;
  }
  
  int getTotal(){ 

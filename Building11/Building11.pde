@@ -75,10 +75,10 @@ void draw() {
   if (Luminosity == true) {
     luminosity.run();
   }
-  
+  heatMap.run();
   if (People == true) {
     //Add sound in here!
-    heatMap.run();
+    heatMap.display();
 
     int x = 650;
     int y = 825;
