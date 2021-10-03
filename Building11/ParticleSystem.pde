@@ -26,7 +26,7 @@ class ParticleSystem {
 
 
   void calculate() {
-    if (frameCount % 1 == 0) {
+    if (frameCount % 5 == 0) {
       rainVal = rainData.getFloat(index, 1);
       index++;
       

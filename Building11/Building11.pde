@@ -66,7 +66,7 @@ void setup() {
   boundaries.add(new Boundary(112, 650, 5, 3000, 0));
   boundaries.add(new Boundary(760, 650, 5, 3000, 0));
 
-  PVector origin = new PVector(width/2, 450);
+  PVector origin = new PVector(width/2, 0);
   heatMap = new HeatMapping(origin);
   luminosity = new Luminosity();
   wind = new Wind();
