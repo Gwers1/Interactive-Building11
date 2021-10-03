@@ -38,18 +38,15 @@ void setup() {
   boundaries.add(new Boundary(110, 800, 5, 1800));
   boundaries.add(new Boundary(760, 800, 5, 1800));
 
-
   imageMode(CENTER);
   img = loadImage("Building11.jpg");
   imageMode(CENTER);
   img2 = loadImage("Building11.png");
   
-  
- PVector origin = new PVector(width/2, 0);
+ PVector origin = new PVector(width/2, -50);
 ps = new ParticleSystem(origin);
 
 }
-
 
 
 void draw() {
@@ -61,19 +58,14 @@ void draw() {
   tint( 255, map(125, 0, height, 0, 255 ) );
   image(img, width/2, 450 );  
 
-
-  // We must always step through time!
   box2d.step();
-  ps.run();
-}
-
-
-  // Run all the particle systems
- 
   
-
+  ps.calculate();
+  ps.run();
 
   // Display all the boundaries
  // for (Boundary wall: boundaries) {
   // wall.display();
   // }
+  
+}

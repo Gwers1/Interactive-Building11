@@ -3,6 +3,8 @@ class Particle {
   // We need to keep track of a Body
   Body body;
 
+int frames;
+
   PVector[] trail;
 
   // Constructor
@@ -10,6 +12,7 @@ class Particle {
     float x = x_;
     float y = y_;
     trail = new PVector[5];
+    frames = frameCount;
     for (int i = 0; i < trail.length; i++) {
       trail[i] = new PVector(x,y);
     }
@@ -17,7 +20,7 @@ class Particle {
     // Add the box to the box2d world
     // Here's a little trick, let's make a tiny tiny radius
     // This way we have collisions, but they don't overwhelm the system
-    makeBody(new Vec2(x,y),5f);
+    makeBody(new Vec2(x,y),2.5);
   }
 
   // This function removes the particle from the box2d world
@@ -30,7 +33,7 @@ class Particle {
     // Let's find the screen position of the particle
     Vec2 pos = box2d.getBodyPixelCoord(body);
     // Is it off the bottom of the screen?
-    if (pos.y > height) {
+    if (frames + 1200 == frameCount) {
       killBody();
       return true;
     }
@@ -51,7 +54,7 @@ class Particle {
     // Draw particle as a trail
     beginShape();
     noFill();
-    strokeWeight(10);
+    strokeWeight(5);
    
     stroke(0,0,255);
     for (int i = 0; i < trail.length; i++) {
