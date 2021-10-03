@@ -64,11 +64,11 @@ class Person{
     //Characteristics
     fd.shape = cs;
     fd.density = 1;
-    fd.friction = 0.5;
-    fd.restitution = 0.3; //We bounce
+    fd.friction = 0.1;
+    fd.restitution = 0.6; //We bounce
     
     b.createFixture(fd);
-    b.setAngularVelocity(random(-10,10));
+    b.setAngularVelocity(random(-20,20));
   }
   
   //test fun

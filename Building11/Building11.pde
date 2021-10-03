@@ -12,6 +12,7 @@ ArrayList<Boundary> boundaries;
 HeatMapping heatMap; 
 Luminosity luminosity;
 
+Wind wind;
 //Additional global varriables
 boolean People, Rain, Wind, Luminosity = false;
 
@@ -62,6 +63,7 @@ void setup() {
   PVector origin = new PVector(width/2, 450);
   heatMap = new HeatMapping(origin);
   luminosity = new Luminosity();
+  wind = new Wind();
 }
 
 void draw() {
@@ -71,6 +73,7 @@ void draw() {
 
   box2d.step();
   
+  wind.calculate();
   luminosity.calculate();  
   if (Luminosity == true) {
     luminosity.display();
@@ -102,9 +105,15 @@ void draw() {
   if(People == false){
     heatMap.restart();
   }
-
-
-
+  
+  if(Wind == true){
+    box2d.setGravity(wind.getWindCalc(), -10);
+    print("setting gravity", wind.getWindCalc());
+  }
+  if(Wind == false){
+   box2d.setGravity(0, -10); 
+  }
+  
   for (int i = 0; i < boundaries.size(); i++) {
     Boundary b = boundaries.get(i);
     b.display();
