@@ -19,7 +19,7 @@ public class Luminosity {
     String audioFileName = sketchPath("") + "light-switch-sound-effect.mp3";
     player = new SamplePlayer(ac, SampleManager.sample(audioFileName));
     player.setKillOnEnd(false);
-    Gain g = new Gain(ac,1,0.5);
+    Gain g = new Gain(ac,1,0.2);
     g.addInput(player);
     
     ac.out.addInput(g);
@@ -38,7 +38,7 @@ public class Luminosity {
 
   void display() {
     fill(rangeConvert(lux));
-    rect(width/2, height - 325, 900, 450);
+    quad(100, 800, 100, 100, 900, 100, 900, 800);
   }
 
   float rangeConvert(float y) { // converts a value in the table into a range from 0-255
