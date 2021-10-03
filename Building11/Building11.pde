@@ -62,9 +62,9 @@ void setup() {
   //ArrayLists here
   boundaries = new ArrayList<Boundary>();
   
-  boundaries.add(new Boundary(width/2, 800, 600, 5, 0));
-  boundaries.add(new Boundary(width/2-300, 650, 5, 300, 0));
-  boundaries.add(new Boundary(width/2+300, 650, 5, 300, 0));
+  boundaries.add(new Boundary(width/2, 760, 900, 5, 0));
+  boundaries.add(new Boundary(112, 650, 5, 3000, 0));
+  boundaries.add(new Boundary(760, 650, 5, 3000, 0));
 
   PVector origin = new PVector(width/2, 450);
   heatMap = new HeatMapping(origin);
@@ -140,8 +140,9 @@ void draw() {
    rain.run();
   }
 
-  for (int i = 0; i < boundaries.size(); i++) {
-    Boundary b = boundaries.get(i);
-    b.display();
-  }
+ // for (int i = 0; i < boundaries.size(); i++) {
+  //  Boundary b = boundaries.get(i);
+  //  b.display();
+ // }
+ 
 }

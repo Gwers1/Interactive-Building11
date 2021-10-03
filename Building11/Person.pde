@@ -41,6 +41,9 @@ class Person{
     float m = map(heat, 0, 10, 0, 255);
     
     pushMatrix();
+    rectMode(CENTER);
+    stroke(0);
+    strokeWeight(1);
     translate(pos.x, pos.y);
     rotate(-a);
     fill(m, 0, 255-m);
