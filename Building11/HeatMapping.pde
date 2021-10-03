@@ -96,7 +96,7 @@ class HeatMapping {
         gainValue += 0.05;
       }
       //print(totalPeople, " ");
-      g.setValue(gainValue);
+      g.setGain(gainValue);
       placeInList++;
     }
   }
