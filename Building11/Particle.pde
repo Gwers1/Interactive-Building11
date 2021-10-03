@@ -81,7 +81,7 @@ class Particle {
   
     fd.density = 1;
     fd.friction = 0.1;// Slippery when wet!
-    fd.restitution = 0.5;
+    fd.restitution = 0.1;
 
     // We could use this if we want to turn collisions off
     //cs.filter.groupIndex = -10;

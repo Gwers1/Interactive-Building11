@@ -4,8 +4,9 @@ import org.jbox2d.collision.shapes.*;
 import org.jbox2d.common.*;
 import org.jbox2d.dynamics.*;
 
-  PImage img;
-  PImage img2;
+PImage img;
+PImage img2;
+ ParticleSystem ps;
 
 // A reference to our box2d world
 Box2DProcessing box2d;
@@ -19,6 +20,7 @@ Luminosity luminosity;
 Wind wind;
 //Additional global varriables
 boolean People, Rain, Wind, Luminosity = false;
+
 
 void setup() {
   size(900, 900);
@@ -76,15 +78,20 @@ void setup() {
   boundaries = new ArrayList<Boundary>();
 
   // Add a bunch of fixed boundaries
- boundaries.add(new Boundary(width/2, 805, 900, 100));
- boundaries.add(new Boundary(110, 800, 5, 1800));
-boundaries.add(new Boundary(760, 800, 5, 1800));
+  boundaries.add(new Boundary(width/2, 805, 900, 100));
+  boundaries.add(new Boundary(110, 800, 5, 1800));
+  boundaries.add(new Boundary(760, 800, 5, 1800));
 
- 
+
   imageMode(CENTER);
   img = loadImage("Building11.jpg");
-imageMode(CENTER);
+  imageMode(CENTER);
   img2 = loadImage("Building11.png");
+  
+  
+ PVector origin = new PVector(width/2, 0);
+ps = new ParticleSystem(origin);
+
 }
 
 void draw() {
@@ -144,34 +151,26 @@ void draw() {
 
 void draw() {
   background(255);
-  tint(255,255);
-    image(img2 , width/2, 450);
-   //lower the opacity of the rectangle to fraction based on mouseY
-    
-    tint( 255, map(125,0, height, 0, 255 ) );
-    image(img, width/2, 450 );  
+  tint(255, 255);
+  image(img2, width/2, 450);
+  //lower the opacity of the rectangle to fraction based on mouseY
 
-
-
+  tint( 255, map(125, 0, height, 0, 255 ) );
+  image(img, width/2, 450 );  
 
 
   // We must always step through time!
   box2d.step();
+  ps.run();
+}
+
 
   // Run all the particle systems
-  for (ParticleSystem system: systems) {
-    system.run();
-
-    int n = (int) random(0,2);
-    system.addParticles(n);
-    }
+ 
   
 
-  // Display all the boundaries
-  //for (Boundary wall: boundaries) {
-  // wall.display();
- // }
 
-  if (random(10) < 0.02) {
-  systems.add(new ParticleSystem(0, new PVector(width/2, -200)));
-  }}
+  // Display all the boundaries
+ // for (Boundary wall: boundaries) {
+  // wall.display();
+  // }
