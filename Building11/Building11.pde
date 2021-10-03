@@ -23,7 +23,7 @@ void setup() {
   box2d = new Box2DProcessing(this);
   box2d.createWorld();
 
-  box2d.setGravity(0, -10);//Gravity for world
+  box2d.setGravity(10, -10);//Gravity for world
 
   //ControlP5 setup
   cp5 = new ControlP5(this);
