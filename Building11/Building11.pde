@@ -8,10 +8,12 @@ import org.jbox2d.dynamics.*;
 Box2DProcessing box2d;
 ControlP5 cp5;
 
+PImage img;
+PImage img2;
 ArrayList<Boundary> boundaries;
 HeatMapping heatMap; 
 Luminosity luminosity;
-
+ParticleSystem rain;
 Wind wind;
 //Additional global varriables
 boolean People, Rain, Wind, Luminosity = false;
@@ -54,9 +56,12 @@ void setup() {
     .setPosition(25, 125)
     .setSize(150, 19)
     ;
+  imageMode(CENTER);
+  img = loadImage("2Building11.png");
+  img2 = loadImage("Building11.png");
   //ArrayLists here
   boundaries = new ArrayList<Boundary>();
-
+  
   boundaries.add(new Boundary(width/2, 800, 600, 5, 0));
   boundaries.add(new Boundary(width/2-300, 650, 5, 300, 0));
   boundaries.add(new Boundary(width/2+300, 650, 5, 300, 0));
@@ -65,28 +70,37 @@ void setup() {
   heatMap = new HeatMapping(origin);
   luminosity = new Luminosity();
   wind = new Wind();
+  rain = new ParticleSystem(origin);
 }
 
 void draw() {
   background(255);
-  fill(0);
-  rect(width/2, height/2 - 300, 900, 400);
-
-  box2d.step();
+  //calculate (Steps)
+  heatMap.run();
   wind.calculate();
-  luminosity.calculate();  
-  if (Luminosity == true) {
+  luminosity.calculate();
+  
+  box2d.step();
+  //Luminosity
+  if(Luminosity == true) {
     luminosity.display();
-    if (lumPlayed == false) {
-      luminosity.play();
-      lumPlayed = true;
-    }
+  if(lumPlayed == false) {
+    luminosity.play();
+    lumPlayed = true;
+   }
   }
-  if (Luminosity == false) {
+  if(Luminosity == false) {
     lumPlayed = false;
   }
-  heatMap.run();
-  if (People == true) {
+  //Images
+  tint(255, 255);
+  image(img2, width/2, 450);
+  
+  tint(255, map(125, 0, height, 0, 255));
+  image(img, width/2, 450);
+  
+  //People heatmap
+  if(People == true) {
     //Add sound in here!
     heatMap.display();
 
@@ -109,15 +123,21 @@ void draw() {
     text("10", 845, 885);
     text("Total People: " + heatMap.getTotal(), 200, 850);
   }
-  if (People == false) {
+  if(People == false) {
     heatMap.restart();
   }
-
-  if (Wind == true) {
+  
+  //Wind
+  if(Wind == true) {
     box2d.setGravity(wind.getWindCalc(), -10);
   }
-  if (Wind == false) {
+  if(Wind == false) {
     box2d.setGravity(0, -10);
+  }
+  //Rain
+  if(Rain == true){
+   rain.calculate();
+   rain.run();
   }
 
   for (int i = 0; i < boundaries.size(); i++) {
