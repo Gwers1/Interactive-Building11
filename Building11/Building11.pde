@@ -70,6 +70,11 @@ void draw() {
   rect(width/2, height/2 - 300, 900, 400);
 
   box2d.step();
+  
+  if (Luminosity == true) {
+    luminosity.run();
+  }
+  
   if (People == true) {
     //Add sound in here!
     heatMap.run();
@@ -93,9 +98,7 @@ void draw() {
     text("10", 845, 885);
     text("Total People: " + heatMap.getTotal(), 200, 850);
   }
-  if (Luminosity == true) {
-    luminosity.run();
-  }
+
 
 
   for (int i = 0; i < boundaries.size(); i++) {
