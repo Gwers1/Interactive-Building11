@@ -137,9 +137,11 @@ void draw() {
   //Wind
   if(Wind == true) {
     box2d.setGravity(wind.getWindCalc(), -10);
+    wind.playSound();
   }
   if(Wind == false) {
     box2d.setGravity(0, -10);
+    wind.stopSound();
   }
   //Rain
   if(Rain == true){
