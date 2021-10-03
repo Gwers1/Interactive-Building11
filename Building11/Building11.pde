@@ -36,25 +36,25 @@ void setup() {
   cp5.addButton("Rain")
     .setSwitch(true)
     .setPosition(25, 50)
-    .setSize(150, 19)
+    .setSize(150, 40)
     ;
 
   cp5.addButton("Wind")
     .setSwitch(true)
-    .setPosition(25, 75)
-    .setSize(150, 19)
+    .setPosition(25, 100)
+    .setSize(150, 40)
     ;
 
   cp5.addButton("People")
     .setSwitch(true)
-    .setPosition(25, 100)
-    .setSize(150, 19)
+    .setPosition(25, 150)
+    .setSize(150, 40)
     ;
 
   cp5.addButton("Luminosity")
     .setSwitch(true)
-    .setPosition(25, 125)
-    .setSize(150, 19)
+    .setPosition(25, 200)
+    .setSize(150, 40)
     ;
   imageMode(CENTER);
   img = loadImage("2Building11.png");
