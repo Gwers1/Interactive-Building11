@@ -51,7 +51,6 @@ class Wind {
         }
       }
     }
-    println(g.getGain());
   }
 
   void stopSound() {
