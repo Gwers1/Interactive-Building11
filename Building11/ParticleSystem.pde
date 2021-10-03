@@ -10,17 +10,28 @@ class ParticleSystem {
   int index =0;
 
   Table rainData = loadTable("https://eif-research.feit.uts.edu.au/api/csv/?rFromDate=2021-03-01T00%3A00&rToDate=2021-04-01T00%3A00&rFamily=weather&rSensor=RG", "csv");
-
+AudioContext ac;
+  SamplePlayer player;
 
   ParticleSystem(PVector v) {
     particles = new ArrayList<Particle>();             // Initialize the ArrayList
     origin = v.get();                        // Store the origin point
+    
+     ac = new AudioContext();
+    String audioFileName = sketchPath("") + "rainfallingsound.mp3";
+    player = new SamplePlayer(ac, SampleManager.sample(audioFileName));
+    player.setKillOnEnd(false);
+    Gain g = new Gain(ac,1,0.2);
+    g.addInput(player);
+    
+    ac.out.addInput(g);
   }
 
-
+    
 
   boolean isRaining() {
     boolean answer = rainData.getFloat(index, 1) > 0;
+    
     return answer;
   }
 
@@ -77,5 +88,11 @@ class ParticleSystem {
     } else {
       return false;
     }
+  }
+  
+  void play() {
+    ac.start();
+    player.start();
+    player.setToLoopStart();
   }
 }

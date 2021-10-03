@@ -18,6 +18,7 @@ Wind wind;
 //Additional global varriables
 boolean People, Rain, Wind, Luminosity = false;
 boolean lumPlayed = false;
+boolean rainPlayed = false;
 
 void setup() {
   size(900, 900);
@@ -91,6 +92,8 @@ void draw() {
   }
   if(Luminosity == false) {
     lumPlayed = false;
+    
+    
   }
   //Images
   tint(255, 255);
@@ -138,6 +141,10 @@ void draw() {
   if(Rain == true){
    rain.calculate();
    rain.run();
+  if(rainPlayed == false){
+   rain.play();
+   rainPlayed = true;
+   }
   }
 
  // for (int i = 0; i < boundaries.size(); i++) {
