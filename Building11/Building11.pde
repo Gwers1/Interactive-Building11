@@ -17,7 +17,7 @@ ParticleSystem rain;
 Wind wind;
 //Additional global varriables
 boolean People, Rain, Wind, Luminosity = false;
-boolean lumPlayed = false;
+boolean lumPlayed, pplPlayed = false;
 
 void setup() {
   size(900, 900);
@@ -84,7 +84,7 @@ void draw() {
   //Luminosity
   if(Luminosity == true) {
     luminosity.display();
-  if(lumPlayed == false) {
+  if(!lumPlayed) {
     luminosity.play();
     lumPlayed = true;
    }
@@ -102,6 +102,11 @@ void draw() {
   //People heatmap
   if(People == true) {
     //Add sound in here!
+    if (!pplPlayed) {
+      heatMap.play();
+      pplPlayed = true;
+    }
+    
     heatMap.display();
 
     int x = 650;
@@ -125,6 +130,8 @@ void draw() {
   }
   if(People == false) {
     heatMap.restart();
+    heatMap.stop();
+    pplPlayed = false;
   }
   
   //Wind
