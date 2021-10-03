@@ -36,8 +36,6 @@ class HeatMapping {
      westIn.getFloat(placeInList, 1) - westOut.getFloat(placeInList, 1) +
      jonesIn.getFloat(placeInList, 1) - jonesOut.getFloat(placeInList, 1)
      ;
-     print("This is in: ", BroadwayIn.getString(placeInList, 0), " ");
-     print("This is out: ", BroadwayOut.getString(placeInList, 0) ," ");
      if(people.size() == 0){ //inital case
        //print(" people.size() if: ", people.size());
        addPeople(totalPeople);
