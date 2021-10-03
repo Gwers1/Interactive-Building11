@@ -61,7 +61,7 @@ void setup() {
 
   PVector origin = new PVector(width/2, 450);
   heatMap = new HeatMapping(origin);
-  luminosity = new Luminosity(boundaries);
+  luminosity = new Luminosity();
 }
 
 void draw() {
@@ -71,10 +71,11 @@ void draw() {
 
   box2d.step();
   
+  luminosity.calculate();  
   if (Luminosity == true) {
-    luminosity.run();
+    luminosity.display();
   }
-  
+
   if (People == true) {
     //Add sound in here!
     heatMap.run();
