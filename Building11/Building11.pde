@@ -3,6 +3,8 @@ import shiffman.box2d.*;
 import org.jbox2d.collision.shapes.*;
 import org.jbox2d.common.*;
 import org.jbox2d.dynamics.*;
+import controlP5.*;
+
 
 PImage img;
 PImage img2;
@@ -14,6 +16,7 @@ ControlP5 cp5;
 
 // A list we'll use to track fixed objects
 ArrayList<Boundary> boundaries;
+ArrayList<ParticleSystem> systems;
 HeatMapping heatMap; 
 Luminosity luminosity;
 
@@ -78,32 +81,41 @@ void setup() {
   boundaries = new ArrayList<Boundary>();
 
   // Add a bunch of fixed boundaries
-  boundaries.add(new Boundary(width/2, 805, 900, 100));
-  boundaries.add(new Boundary(110, 800, 5, 1800));
-  boundaries.add(new Boundary(760, 800, 5, 1800));
+  boundaries.add(new Boundary(width/2, 760, 900, 5, 0));
+  boundaries.add(new Boundary(width/2-332, 600, 5, 400, 0));
+  boundaries.add(new Boundary(width/2+310, 525, 5, 500, 0));
 
   imageMode(CENTER);
   img = loadImage("Building11.jpg");
   imageMode(CENTER);
   img2 = loadImage("Building11.png");
   
- PVector origin = new PVector(width/2, -50);
-ps = new ParticleSystem(origin);
+  PVector pOrigin = new PVector(width/2, -50);
+  ps = new ParticleSystem(pOrigin);
 
 }
 
 void draw() {
   background(255);
-  fill(0);
-  rect(width/2, height/2 - 300, 900, 400);
+  if (Luminosity == true) {
+    luminosity.display();
+  }
+  tint(255, 255);
+  image(img2, width/2, 450);
+  tint( 255, map(125, 0, height, 0, 255 ) );
+  image(img, width/2, 450 );  
 
   box2d.step();
   
   wind.calculate();
-  luminosity.calculate();  
-  if (Luminosity == true) {
-    luminosity.display();
+  luminosity.calculate();
+  if(Rain == true){
+    ps.calculate();
+    ps.run(); 
   }
+  
+  
+
   heatMap.run();
   if (People == true) {
     //Add sound in here!
@@ -134,36 +146,14 @@ void draw() {
   
   if(Wind == true){
     box2d.setGravity(wind.getWindCalc(), -10);
-    print("setting gravity", wind.getWindCalc());
   }
   if(Wind == false){
    box2d.setGravity(0, -10); 
   }
   
-  for (int i = 0; i < boundaries.size(); i++) {
-    Boundary b = boundaries.get(i);
-    b.display();
-  }
+  //for (int i = 0; i < boundaries.size(); i++) {
+  //  Boundary b = boundaries.get(i);
+  //  b.display();
+  //}
 
-}
-
-void draw() {
-  background(255);
-  tint(255, 255);
-  image(img2, width/2, 450);
-  //lower the opacity of the rectangle to fraction based on mouseY
-
-  tint( 255, map(125, 0, height, 0, 255 ) );
-  image(img, width/2, 450 );  
-
-  box2d.step();
-  
-  ps.calculate();
-  ps.run();
-
-  // Display all the boundaries
- // for (Boundary wall: boundaries) {
-  // wall.display();
-  // }
-  
 }
