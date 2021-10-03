@@ -19,13 +19,20 @@ class ParticleSystem {
   }
 
 
+
   boolean isRaining() {
-    boolean answer = rainData.getFloat(index,1) > 0;
-    index++;
+    boolean answer = rainData.getFloat(index, 1) > 0;
     return answer;
-   
   }
 
+
+  void calculate() {
+    if (frameCount % 1 == 0) {
+      rainVal = rainData.getFloat(index, 1);
+      index++;
+      
+    }
+  }
 
 
   float getRainVal() {
@@ -38,10 +45,12 @@ class ParticleSystem {
     for (Particle p : particles) {
       p.display();
     }
-    
-    if (isRaining()){
-     addParticles(10);
+
+    if (isRaining()) {
+      addParticles((int) (rainVal*40));
     }
+
+
 
     // Particles that leave the screen, we delete them
     // (note they have to be deleted from both the box2d world and our list
@@ -57,7 +66,8 @@ class ParticleSystem {
 
   void addParticles(int n) {
     for (int i = 0; i < n; i++) {
-      particles.add(new Particle(origin.x + random(-200, 200), origin.y));
+      particles.add(new Particle(origin.x + random(-300, 300), origin.y));
+    
     }
   }
 
